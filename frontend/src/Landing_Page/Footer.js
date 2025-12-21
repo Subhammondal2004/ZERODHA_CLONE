@@ -195,18 +195,53 @@ function Footer() {
             create a ticket here.
           </p>
         </div>
-        <div className="text-muted text-center pb-3">
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>NSE​</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>BSE</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>MCX</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>Terms & conditions</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>Policies & procedures</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>Privacy policy</a>
-          <a className="mx-4 d-inline-block" style={{textDecoration:"none"}}>Disclosure</a>
+        <div className="text-center pb-3">
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            NSE​
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            BSE
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            MCX
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            Terms & conditions
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            Policies & procedures
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            Privacy policy
+          </a>
+          <a
+            className="mx-4 d-inline-block text-muted"
+            style={{ textDecoration: "none", fontWeight: "500" }}
+          >
+            Disclosure
+          </a>
         </div>
       </div>
     </footer>
-    );
+  );
 }
 
 export default Footer;

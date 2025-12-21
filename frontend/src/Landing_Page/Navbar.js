@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
@@ -8,9 +8,9 @@ function Navbar() {
       style={{ backgroundColor: "#fff" }}
     >
       <div class="container">
-        <Link class="navbar-brand" to="/">
+        <NavLink class="navbar-brand" to="/">
           <img src="media/images/logo.svg" style={{ width: "25%" }}></img>
-        </Link>
+        </NavLink>
         <button
           class="navbar-toggler"
           type="button"
@@ -26,29 +26,60 @@ function Navbar() {
           <form class="d-flex" role="search">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <Link class="nav-link" aria-current="page" to="/signup">
+                <NavLink
+                  class="nav-link"
+                  aria-current="page"
+                  to="/signup"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-primary" : "nav-link"
+                  }
+                >
                   Signup
-                </Link>
+                </NavLink>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/about">
+                <NavLink
+                  class="nav-link"
+                  to="/about"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-primary" : "nav-link"
+                  }
+                >
                   About
-                </Link>
+                </NavLink>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/product">
+                <NavLink
+                  class="nav-link"
+                  to="/product"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-primary" : "nav-link"
+                  }
+                >
                   Product
-                </Link>
+                </NavLink>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/pricing">
+                <NavLink
+                  class="nav-link"
+                  to="/pricing"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-primary" : "nav-link"
+                  }
+                >
                   Pricing
-                </Link>
+                </NavLink>
               </li>
               <li class="nav-item">
-                <Link class="nav-link" to="/support">
+                <NavLink
+                  class="nav-link"
+                  to="/support"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active text-primary" : "nav-link"
+                  }
+                >
                   Support
-                </Link>
+                </NavLink>
               </li>
             </ul>
           </form>
