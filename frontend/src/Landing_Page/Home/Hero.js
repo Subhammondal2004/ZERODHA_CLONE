@@ -10,7 +10,7 @@ function Hero() {
           className="mb-5"
         ></img>
         <h1 className="mt-5">Invest in everything</h1>
-        <p>
+        <p className="fs-5 mb-5">
           {" "}
           Online platform to invest in stocks, derivatives, mutual funds, and
           more
