@@ -1,0 +1,1 @@
+export const DB_NAME= "Zerodha_clone-database"
