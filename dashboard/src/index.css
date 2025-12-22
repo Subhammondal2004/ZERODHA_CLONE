@@ -739,6 +739,9 @@ hr {
   font-weight: 400;
   font-size: 0.8rem;
   border: 0.7px solid #4184f3;
+  margin: 5px 5px;
+  padding: 2px 8px;
+  border-radius: 3px;
 }
 
 .sell {
@@ -747,11 +750,17 @@ hr {
   font-weight: 400;
   font-size: 0.8rem;
   border: 0.7px solid #ff5722;
+   margin: 5px 5px;
+  padding: 2px 8px;
+  border-radius: 3px;
 }
 
 .action {
   background-color: #fff;
   border: 0.7px solid #9b9b9b;
+   margin: 5px 5px;
+  padding: 0 8px;
+  border-radius: 3px;
 }
 
 .icon {
