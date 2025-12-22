@@ -6,14 +6,14 @@ const app = express();
 
 dotenv.config();
 
-const PORT= process.env.PORT;
+const PORT = process.env.PORT;
 
 connectionDB()
-.then(()=>{
-    app.listen(PORT, ()=>{
-        console.log(`Server is running on PORT:${PORT}`);
-    })
-})
-.catch((error)=>{
-    console.log('Error connecting to DB', error);
-})
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on PORT:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Error connecting to DB", error);
+  });
