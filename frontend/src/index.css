@@ -22,3 +22,14 @@ code {
 .navbar-brand{
   margin-left: 60px;
 }
+#supportHero{
+  background-color: rgb(56,126,209);
+  color: white;
+  padding: 50px 200px;
+  margin-bottom: 100px;
+}
+#supportTitle{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 50px;
+}
