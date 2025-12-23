@@ -11,10 +11,15 @@ const OrderSchema = new Schema({
     },
     price:{
         type:Number,
-        default:1
+        default:0
     },
-    mode:{
-        type:String
+    transactionType:{
+        type:String,
+        enum:["BUY", "SELL"]
+    },
+    status:{
+        type:String,
+        enum:["OPEN", "COMPLETE", "CANCELLED", "REJECTED"]
     }
 },{ timestamps: true})
 

@@ -9,6 +9,14 @@ const PositionSchema = new Schema({
         type:String,
         required: true
     },
+    buyqty:{
+        type:Number,
+        default:0
+    },
+    sellqty:{
+        type:Number,
+        default:0
+    },
     qty:{
         type:Number,
         default:0
@@ -16,10 +24,11 @@ const PositionSchema = new Schema({
     avg:{
         type:Number
     },
-    net:{
-        type:String
+    curprice:{
+        type:Number,
+        default:0
     },
-    day:{
+    dayCharge:{
         type:String
     },
     isLoss:{

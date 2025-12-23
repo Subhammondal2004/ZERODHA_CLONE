@@ -16,10 +16,8 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-import holdingRoute from "./routes/holding-routes.js";
-import positionRoute from "./routes/position-routes.js";
+import portfolioRoute from "./routes/portfolio-routes.js";
 
-app.use("/api/v1/holding",holdingRoute);
-app.use("/api/v1/position", positionRoute)
+app.use("/api/v1/portfolio", portfolioRoute);
 
 export default app;

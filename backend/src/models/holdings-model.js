@@ -16,10 +16,17 @@ const HoldingSchema = new Schema({
         type: Number,
         required: true
     },
-    net:{
+    curPrice:{
+        type:Number,
+    },
+    isProfit:{
+        type:Boolean,
+        default:false
+    },
+    netCharge:{
         type: String
     },
-    day:{
+    dayCharge:{
         type:String
     }
 },{timestamps: true })
