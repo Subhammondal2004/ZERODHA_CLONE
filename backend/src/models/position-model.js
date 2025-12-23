@@ -24,7 +24,10 @@ const PositionSchema = new Schema({
     avg:{
         type:Number
     },
-    curprice:{
+    price:{
+        type:Number
+    },
+    curPrice:{
         type:Number,
         default:0
     },

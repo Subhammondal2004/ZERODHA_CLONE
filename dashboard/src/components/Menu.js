@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Menu = () => {
+const Menu = ({ user }) => {
   const [selMenu, setSelMenu] = useState(0);
   const [isprofileDropdown, setIsprofileDropdown] = useState(false);
+  const [userLogout, setUserLogout] = useState(null);
 
   const handleMenuClick = (index) => {
     setSelMenu(index);
@@ -11,6 +13,23 @@ const Menu = () => {
 
   const handleProfileClick = (index) => {
     setIsprofileDropdown(!isprofileDropdown);
+  };
+
+  const handleLogout = () => {
+    axios
+      .get(
+        "http://localhost:8000/api/v1/users/logout",
+        {
+          withCredentials: true,
+        }
+      )
+      .then((res) => {
+        if (res.data.success) {
+          setUserLogout(null);
+          window.location.href = "http://localhost:3000";
+        }
+      })
+      .catch((err) => console.log(err.message));
   };
 
   const menuClass = "menu";
@@ -23,7 +42,7 @@ const Menu = () => {
         <ul>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/"
               onClick={() => handleMenuClick(0)}
             >
@@ -34,7 +53,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/orders"
               onClick={() => handleMenuClick(1)}
             >
@@ -45,7 +64,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/holdings"
               onClick={() => handleMenuClick(2)}
             >
@@ -56,7 +75,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/positions"
               onClick={() => handleMenuClick(3)}
             >
@@ -67,7 +86,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/funds"
               onClick={() => handleMenuClick(4)}
             >
@@ -78,7 +97,7 @@ const Menu = () => {
           </li>
           <li>
             <Link
-              style={{ textDecoration:"none" }}
+              style={{ textDecoration: "none" }}
               to="/apps"
               onClick={() => handleMenuClick(5)}
             >
@@ -90,8 +109,10 @@ const Menu = () => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+          <button className="avatar" onClick={handleLogout}>
+            ZU
+          </button>
+          <p className="username">{user.name}</p>
         </div>
       </div>
     </div>

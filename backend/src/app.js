@@ -4,10 +4,11 @@ import cors from "cors";
 const app = express();
 
 const OPTIONS={
-    origin:[
+    origin: [
+        "http://localhost:3000",
         "http://localhost:3001"
     ],
-    Credential: true
+    credentials: true
 }
 
 app.use(cors(OPTIONS));
@@ -17,7 +18,9 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 import portfolioRoute from "./routes/portfolio-routes.js";
+import userRoute from "./routes/user-routes.js";
 
 app.use("/api/v1/portfolio", portfolioRoute);
+app.use("/api/v1/users", userRoute);
 
 export default app;

@@ -3,10 +3,9 @@ import axios from "axios";
 
 const Positions = () => {
   const [positions, setPositions] = useState([]);
-
+  const URL = process.env.REACT_APP_SERVER_URL;
   useEffect(()=>{
-    axios.get("http://localhost:8000/api/v1/position/").then((res)=>{
-      console.log(res.data.data);
+    axios.get(`${URL}/portfolio/positions`).then((res)=>{
       setPositions(res.data.data);
     })
   },[]);
@@ -27,8 +26,7 @@ const Positions = () => {
           </tr>
 
           {positions.map((stock, index) => {
-            const curValue = stock.price * stock.qty;
-            const isProfit = curValue - stock.avg * stock.qty >= 0.0;
+            const isProfit = stock.curPrice - stock.avg * stock.qty >= 0.0;
             const profitClass = isProfit ? "profit" : "loss";
             const dayChange = stock.isLoss ? "loss" : "profit";
 
@@ -40,9 +38,9 @@ const Positions = () => {
                 <td>{stock.avg.toFixed(2)}</td>
                 <td>{stock.price.toFixed(2)}</td>
                 <td className={profitClass}>
-                  {(curValue - stock.avg * stock.qty).toFixed(2)}
+                  {(stock.curPrice - stock.avg * stock.qty).toFixed(2)}
                 </td>
-                <td className={dayChange}>{stock.day}</td>
+                <td className={dayChange}>{stock.dayCharge}</td>
               </tr>
             );
           })}

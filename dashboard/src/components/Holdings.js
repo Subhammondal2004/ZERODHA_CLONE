@@ -3,9 +3,10 @@ import axios from "axios";
 
 const Holdings = () => {
   const [holdings, setHoldings] = useState([]);
+  const URL = process.env.REACT_APP_SERVER_URL;
 
   useEffect(()=> {
-      axios.get("http://localhost:8000/api/v1/holding/").then((res)=>{
+      axios.get(`${URL}/portfolio/holdings`).then((res)=>{
         setHoldings(res.data.data);
       })
   },[]);
@@ -28,10 +29,7 @@ const Holdings = () => {
           </tr>
 
           {holdings.map((stock, index) => {
-            const curValue = stock.price * stock.qty;
-            const isProfit = curValue - stock.avg * stock.qty >= 0.0;
-            const profitClass = isProfit ? "profit" : "loss";
-            const dayChange = stock.isLoss ? "loss" : "profit";
+            const profitClass = stock.isProfit ? "profit" : "loss";
 
             return (
               <tr key={index}>
@@ -39,10 +37,10 @@ const Holdings = () => {
                 <td>{stock.qty}</td>
                 <td>{stock.avg.toFixed(2)}</td>
                 <td>{stock.price.toFixed(2)}</td>
-                <td>{curValue.toFixed(2)}</td>
-                <td className={profitClass}>{(curValue - stock.avg * stock.qty).toFixed(2)}</td>
-                <td className={profitClass}>{stock.net}</td>
-                <td className={dayChange}>{stock.day}</td>
+                <td>{stock.curPrice.toFixed(2)}</td>
+                <td className={profitClass}>{(stock.curPrice - stock.avg * stock.qty).toFixed(2)}</td>
+                <td className={profitClass}>{stock.netCharge}</td>
+                <td className={profitClass}>{stock.dayCharge}</td>
               </tr>
             );
           })}

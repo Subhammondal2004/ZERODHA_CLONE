@@ -124,7 +124,7 @@ const addHoldings = asyncHandler(async (req, res) => {
       avg: data.avg,
       price: data.price,
       curPrice: data.price * data.qty,
-      isProfit: data.curPrice - data.avg * data.qty >= 0.0,
+      isProfit: ((data.price * data.qty ) - (data.avg * data.qty)) >= 0.0,
       dayCharge: data.day,
       netCharge: data.net,
     });
@@ -165,6 +165,7 @@ const addPosition = asyncHandler(async (req, res) => {
       qty: data.qty,
       buyqty:data.buyqty,
       sellqty: data.sellqty,
+      price: data.price,
       avg: data.avg,
       curPrice: data.price * data.qty,
       dayCharge: data.day,
