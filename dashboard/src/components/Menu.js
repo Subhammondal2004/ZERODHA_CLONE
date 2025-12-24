@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { handleAxiosError } from "../handleAxiosError";
 
 const Menu = ({ user }) => {
   const [selMenu, setSelMenu] = useState(0);
@@ -17,19 +19,17 @@ const Menu = ({ user }) => {
 
   const handleLogout = () => {
     axios
-      .get(
-        "http://localhost:8000/api/v1/users/logout",
-        {
-          withCredentials: true,
-        }
-      )
+      .get("http://localhost:8000/api/v1/users/logout", {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data.success) {
+          toast.success("Logged out successfully");
           setUserLogout(null);
           window.location.href = "http://localhost:3000";
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => handleAxiosError(err));
   };
 
   const menuClass = "menu";

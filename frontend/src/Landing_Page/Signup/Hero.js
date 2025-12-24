@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import LoginModal from "../Login/LoginModal";
+import { handleAxiosError } from "../../handleAxiosError";
+import { toast } from "react-toastify";
 
 function Hero() {
   const [name, setName] = useState("");
@@ -23,10 +25,11 @@ function Hero() {
           setName("");
           setEmail("");
           setPassword("");
+          toast.success("Signup successful!");
           window.location.href = "http://localhost:3001";
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((error) => handleAxiosError(error));
   };
   return (
     <div className="container">

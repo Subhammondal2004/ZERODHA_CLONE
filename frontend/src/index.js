@@ -2,6 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Homepage from "./Landing_Page/Home/HomePage";
 import Signup from "./Landing_Page/Signup/Signup";
@@ -27,5 +29,12 @@ root.render(
       <Route path="*" element={<NotFound />} />
     </Routes>
     <Footer />
+    <ToastContainer
+      position="top-right"
+      autoClose={3000}
+      pauseOnHover
+      draggable
+      theme="colored"
+    />
   </BrowserRouter>
 );

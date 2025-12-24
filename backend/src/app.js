@@ -17,10 +17,15 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(cookieParser());
 
+import errorMiddleware from "./middlewares/error-midddleware.js";
+
 import portfolioRoute from "./routes/portfolio-routes.js";
 import userRoute from "./routes/user-routes.js";
 
 app.use("/api/v1/portfolio", portfolioRoute);
 app.use("/api/v1/users", userRoute);
+
+
+app.use(errorMiddleware);
 
 export default app;

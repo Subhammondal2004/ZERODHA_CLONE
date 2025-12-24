@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./LoginModal.css";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { handleAxiosError } from "../../handleAxiosError";
 
 const LoginModal = ({ closeModal }) => {
   const [email, setEmail] = useState("");
@@ -24,13 +26,13 @@ const LoginModal = ({ closeModal }) => {
       )
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data.data);
+          toast.success("Login successful");
           setEmail("");
           setPassword("");
           window.location.href = "http://localhost:3001";
         }
       })
-      .catch((err) => console.log(err.message));
+      .catch((error) => handleAxiosError(error));
     closeModal();
   };
 

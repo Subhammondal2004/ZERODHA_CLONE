@@ -10,21 +10,21 @@ const Home = () => {
   const URL = process.env.REACT_APP_SERVER_URL;
 
   useEffect(() => {
-    axios.get(`${URL}/users/loggedinuser`, {
-      withCredentials: true,
-    })
-    .then((res) => {
-      setUser(res.data.data.user);
-      setLoading(false);
-    })
-    .catch(() => {
-      window.location.href = "http://localhost:3000";
-    });
+    axios
+      .get(`${URL}/users/loggedinuser`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setUser(res.data.data.user);
+        setLoading(false);
+      })
+      .catch(() => {
+        window.location.href = "http://localhost:3000";
+      });
   }, []);
   if (loading) {
     return <h3>Checking session...</h3>;
   }
-
   return (
     <>
       <TopBar user={user} />
