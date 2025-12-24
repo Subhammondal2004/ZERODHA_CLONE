@@ -15,7 +15,7 @@ function Hero() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/v1/users/signup", {
+      .post(`${URL}/users/signup`, {
         name,
         email,
         password,
@@ -25,11 +25,16 @@ function Hero() {
           setName("");
           setEmail("");
           setPassword("");
-          toast.success("Signup successful!");
+          toast.success(res.data.message);
           window.location.href = "http://localhost:3001";
         }
       })
-      .catch((error) => handleAxiosError(error));
+      .catch((error) => {
+        setName("");
+        setEmail("");
+        setPassword("");
+        handleAxiosError(error);
+      });
   };
   return (
     <div className="container">

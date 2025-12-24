@@ -1,14 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import FundModal from "./FundModal";
+import { handleAxiosError } from "../handleAxiosError";
 
-const Funds = () => {
+const Funds = ({ user }) => {
+  const [fund, setFund] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [modaltype, setModalType] = useState(null);
+  const URL = process.env.REACT_APP_SERVER_URL;
+
+  useEffect(() => {
+    axios
+      .get(`${URL}/funds/`, { withCredentials: true })
+      .then((res) => {
+        setFund(res.data.data);
+      })
+      .catch((err) => {
+        handleAxiosError(err)
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [fund]);
+
+  if(loading){
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <div className="funds">
         <p>Instant, zero-cost fund transfers with UPI </p>
-        <Link className="btn btn-green">Add funds</Link>
-        <Link className="btn btn-blue">Withdraw</Link>
+        <button className="btn btn-green" onClick={() => setModalType("add")}>Add funds</button>
+        <button className="btn btn-blue" onClick={() => setModalType("withdraw")}>Withdraw</button>
+        {modaltype && (
+        <FundModal
+          type={modaltype}
+          onClose={() => setModalType(null)}
+        />
+        )}
       </div>
+      
 
       <div className="row">
         <div className="col">
@@ -17,26 +50,22 @@ const Funds = () => {
           </span>
 
           <div className="table">
-            <div className="data">
+            <div className="data m-5">
               <p>Available margin</p>
-              <p className="imp colored">4,043.10</p>
+              <p>{fund.availableBal}</p>
             </div>
-            <div className="data">
+            <div className="data m-5">
               <p>Used margin</p>
-              <p className="imp">3,757.30</p>
+              <p>{fund.usedMargin}</p>
             </div>
             <div className="data">
               <p>Available cash</p>
-              <p className="imp">4,043.10</p>
+              <p className="imp">{fund.availableBal}</p>
             </div>
             <hr />
             <div className="data">
               <p>Opening Balance</p>
-              <p>4,043.10</p>
-            </div>
-            <div className="data">
-              <p>Opening Balance</p>
-              <p>3736.40</p>
+              <p>{fund.openingBal}</p>
             </div>
             <div className="data">
               <p>Payin</p>

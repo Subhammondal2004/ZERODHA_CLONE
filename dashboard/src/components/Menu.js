@@ -8,6 +8,7 @@ const Menu = ({ user }) => {
   const [selMenu, setSelMenu] = useState(0);
   const [isprofileDropdown, setIsprofileDropdown] = useState(false);
   const [userLogout, setUserLogout] = useState(null);
+  const URL = process.env.REACT_APP_SERVER_URL;
 
   const handleMenuClick = (index) => {
     setSelMenu(index);
@@ -19,13 +20,13 @@ const Menu = ({ user }) => {
 
   const handleLogout = () => {
     axios
-      .get("http://localhost:8000/api/v1/users/logout", {
+      .get(`${URL}/users/logout`, {
         withCredentials: true,
       })
       .then((res) => {
         if (res.data.success) {
-          toast.success("Logged out successfully");
           setUserLogout(null);
+          toast.success(res.data.message);
           window.location.href = "http://localhost:3000";
         }
       })
@@ -86,6 +87,7 @@ const Menu = ({ user }) => {
           </li>
           <li>
             <Link
+            user={user}
               style={{ textDecoration: "none" }}
               to="/funds"
               onClick={() => handleMenuClick(4)}

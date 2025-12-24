@@ -12,10 +12,8 @@ export const authVerify = asyncHandler(async (req, _, next) => {
       throw new ApiError(401, "Unauthorized request!!");
     }
     const decordedInfo = jwt.verify(token, process.env.TOKEN_SECRET);
-    console.log(decordedInfo);
 
     const user = await User.findById(decordedInfo._id).select("-password");
-    console.log(user);
     if (!user) {
       throw new ApiError(400, "Invaild access Token");
     }

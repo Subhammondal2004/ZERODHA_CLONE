@@ -2,6 +2,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiError from "../utils/apiError.js";
 import ApiResponse from "../utils/apiResponse.js";
 import { User } from "../models/user-model.js";
+import { Fund } from "../models/funds-model.js";
 
 const generateTokenOfUser = async (userId) => {
   try {
@@ -33,6 +34,13 @@ const signup = asyncHandler(async (req, res) => {
   });
 
   const signupUser = await User.findById(user._id).select("-password");
+
+  await Fund.create({
+    userId: signupUser._id,
+    availableBal: 0,
+    usedMargin: 0,
+    openingBal: 0
+  });
 
   return res
     .status(201)

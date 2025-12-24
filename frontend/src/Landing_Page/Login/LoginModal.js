@@ -7,6 +7,7 @@ import { handleAxiosError } from "../../handleAxiosError";
 const LoginModal = ({ closeModal }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const URL = process.env.REACT_APP_SERVER_URL;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const LoginModal = ({ closeModal }) => {
 
     axios
       .post(
-        "http://localhost:8000/api/v1/users/login",
+        `${URL}/users/login`,
         {
           email,
           password,
@@ -26,9 +27,9 @@ const LoginModal = ({ closeModal }) => {
       )
       .then((res) => {
         if (res.data.success) {
-          toast.success("Login successful");
           setEmail("");
           setPassword("");
+          toast.success(res.data.message);
           window.location.href = "http://localhost:3001";
         }
       })
