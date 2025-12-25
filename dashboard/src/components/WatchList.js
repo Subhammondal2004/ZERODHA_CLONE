@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import GeneralContext from "./GeneralContext";
+import BuySellModal from "./BuySellModal";
 
 import { Tooltip, Grow } from "@mui/material";
 import {
@@ -65,11 +65,12 @@ const WatchListItem = ({ stock }) => {
 };
 
 const WatchListActions = ({ uid }) => {
-  const generalContext = useContext(GeneralContext);
+  // const generalContext = useContext(GeneralContext);
 
-  const handleBuyClick = () => {
-    generalContext.openBuyWindow(uid);
-  };
+  // const handleBuyClick = () => {
+  //   generalContext.openBuyWindow(uid);
+  // };
+  const [modaltype, setModalType] = useState(null);
   return (
     <span className="actions">
       <span>
@@ -78,7 +79,7 @@ const WatchListActions = ({ uid }) => {
           placement="top"
           arrow
           TransitionComponent={Grow}
-          onClick={handleBuyClick}
+          onClick={() => setModalType("BUY")}
         >
           <bottom className="buy">Buy</bottom>
         </Tooltip>
@@ -87,9 +88,13 @@ const WatchListActions = ({ uid }) => {
           placement="top"
           arrow
           TransitionComponent={Grow}
+          onClick={() => setModalType("SELL")}
         >
           <bottom className="sell">Sell</bottom>
         </Tooltip>
+        {modaltype && (
+          <BuySellModal type={modaltype} onClose={() => setModalType(null)} />
+        )}
         <Tooltip
           title="Analytics (A)"
           placement="top"

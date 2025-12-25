@@ -1,6 +1,11 @@
 import mongoose, {Schema} from "mongoose";
 
 const OrderSchema = new Schema({
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref:"user",
+        required: true
+    },
     name:{
         type:String,
         required:true
@@ -13,13 +18,14 @@ const OrderSchema = new Schema({
         type:Number,
         default:0
     },
-    transactionType:{
+    orderType:{
         type:String,
         enum:["BUY", "SELL"]
     },
     status:{
         type:String,
-        enum:["OPEN", "COMPLETE", "CANCELLED", "REJECTED"]
+        enum:["OPEN", "COMPLETE", "CANCELLED", "REJECTED"],
+        default:"OPEN"
     }
 },{ timestamps: true})
 

@@ -1,29 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import FundModal from "./FundModal";
-import { handleAxiosError } from "../handleAxiosError";
+import { FundsContext } from "./FundContext";
 
-const Funds = ({ user }) => {
-  const [fund, setFund] = useState(null);
-  const [loading, setLoading] = useState(true);
+const Funds = () => {
   const [modaltype, setModalType] = useState(null);
-  const URL = process.env.REACT_APP_SERVER_URL;
-
-  useEffect(() => {
-    axios
-      .get(`${URL}/funds/`, { withCredentials: true })
-      .then((res) => {
-        setFund(res.data.data);
-      })
-      .catch((err) => {
-        handleAxiosError(err)
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [fund]);
-
+  const { fund, loading } = useContext(FundsContext);
+  
   if(loading){
     return <p>Loading...</p>;
   }
@@ -32,8 +15,8 @@ const Funds = ({ user }) => {
     <>
       <div className="funds">
         <p>Instant, zero-cost fund transfers with UPI </p>
-        <button className="btn btn-green" onClick={() => setModalType("add")}>Add funds</button>
-        <button className="btn btn-blue" onClick={() => setModalType("withdraw")}>Withdraw</button>
+        <button className="btn btn-green" style={{width:"90px", height:"30px"}} onClick={() => setModalType("add")}>Add funds</button>
+        <button className="btn btn-blue" style={{width:"90px", height:"30px"}} onClick={() => setModalType("withdraw")}>Withdraw</button>
         {modaltype && (
         <FundModal
           type={modaltype}

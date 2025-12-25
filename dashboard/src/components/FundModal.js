@@ -9,7 +9,7 @@ export default function FundModal({ type, onClose }) {
   const [addfund, setAddFund] = useState(null);
   const [withdrawfund, setWithdrawFund] = useState(null);
   const URL = process.env.REACT_APP_SERVER_URL;
-
+  
   const handleAddFunds = () => {
     axios
       .post(`${URL}/funds/add`, { amount: amount }, { withCredentials: true })
@@ -39,6 +39,8 @@ export default function FundModal({ type, onClose }) {
         handleAxiosError(err);
       });
   };
+
+  
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>

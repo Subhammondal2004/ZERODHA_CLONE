@@ -1,6 +1,13 @@
-import React from "react";
+import React,{ useContext } from "react";
+import { FundsContext } from "./FundContext";
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 const Summary = ({user}) => {
+  const { fund , loading } = useContext(FundsContext);
+  if(loading){
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <div className="username">
@@ -15,17 +22,17 @@ const Summary = ({user}) => {
 
         <div className="data">
           <div className="first">
-            <h3>3.74k</h3>
+            <h3 style={{color:"green"}}><CurrencyRupeeIcon />{fund.availableBal}</h3>
             <p>Margin available</p>
           </div>
           <hr />
 
           <div className="second">
             <p>
-              Margins used <span>0</span>{" "}
+              Margins used <span><CurrencyRupeeIcon fontSize="12px"/>{fund.usedMargin}</span>{" "}
             </p>
             <p>
-              Opening balance <span>3.74k</span>{" "}
+              Opening balance <span><CurrencyRupeeIcon fontSize="12px"/>{fund.openingBal}</span>{" "}
             </p>
           </div>
         </div>

@@ -9,10 +9,6 @@ const TradeSchema = new Schema({
         typr: Schema.Types.ObjectId,
         ref: "User"
     },
-    name:{
-        type:String,
-        required: true
-    },
     qty:{
         type:Number,
         default:0
@@ -20,6 +16,13 @@ const TradeSchema = new Schema({
     price:{
         type:Number,
         required: true
+    },
+    tradedAt:{
+        type: Date,
+        default: Date.now()
+    },
+    orderType:{
+        type:String
     }
 },{ timestamps: true}) 
 

@@ -22,11 +22,12 @@ import errorMiddleware from "./middlewares/error-midddleware.js";
 import portfolioRoute from "./routes/portfolio-routes.js";
 import userRoute from "./routes/user-routes.js";
 import fundRoute from "./routes/fund-routes.js";
+import orderRoute from "./routes/order-routes.js";
 
 app.use("/api/v1/portfolio", portfolioRoute);
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/funds", fundRoute);
-
+app.use("/api/v1/orders", orderRoute);
 
 app.use(errorMiddleware);
 
