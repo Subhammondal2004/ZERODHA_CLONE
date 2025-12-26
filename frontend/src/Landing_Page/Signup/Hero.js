@@ -100,19 +100,20 @@ function Hero() {
               <button
                 type="submit"
                 className="btn btn-primary"
-                style={{ marginRight: "270px" }}
+                style={{ marginRight: "270px",  width:"395px"}}
               >
                 Signup
               </button>
             </div>
           </form>
-          <div>
-            <button
+          <div className="mt-2 mx-5 px-4">
+            <span className="mx-2">Do you have an account?</span>
+            <a
               onClick={() => setShowLogin(true)}
-              className="btn btn-primary"
+              style={{color:"blue", cursor:"pointer", fontWeight:"bold"}}
             >
               Login
-            </button>
+            </a>
 
             {showLogin && <LoginModal closeModal={() => setShowLogin(false)} />}
           </div>

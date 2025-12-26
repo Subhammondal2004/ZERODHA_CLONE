@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { handleAxiosError } from "../handleAxiosError";
 
 const Menu = ({ user }) => {
+  const ava = (user.name).charAt(0);
   const [selMenu, setSelMenu] = useState(0);
   const [isprofileDropdown, setIsprofileDropdown] = useState(false);
   const [userLogout, setUserLogout] = useState(null);
@@ -87,7 +88,7 @@ const Menu = ({ user }) => {
           </li>
           <li>
             <Link
-            user={user}
+              user={user}
               style={{ textDecoration: "none" }}
               to="/funds"
               onClick={() => handleMenuClick(4)}
@@ -111,8 +112,8 @@ const Menu = ({ user }) => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <button className="avatar" onClick={handleLogout}>
-            ZU
+          <button className="avatar" style={{fontSize:"25px"}} onClick={handleLogout}>
+            {ava}
           </button>
           <p className="username">{user.name}</p>
         </div>
