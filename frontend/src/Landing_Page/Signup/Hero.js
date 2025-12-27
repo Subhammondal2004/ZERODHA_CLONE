@@ -26,7 +26,7 @@ function Hero() {
           setEmail("");
           setPassword("");
           toast.success(res.data.message);
-          window.location.href = "http://localhost:3001";
+          window.location.href = "https://zerodha-clone-dashboard-av6a.onrender.com";
         }
       })
       .catch((error) => {

@@ -11,9 +11,6 @@ const LoginModal = ({ closeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-
     axios
       .post(
         `${URL}/users/login`,
@@ -30,7 +27,7 @@ const LoginModal = ({ closeModal }) => {
           setEmail("");
           setPassword("");
           toast.success(res.data.message);
-          window.location.href = "http://localhost:3001";
+          window.location.href = "https://zerodha-clone-dashboard-av6a.onrender.com";
         }
       })
       .catch((error) => handleAxiosError(error));
