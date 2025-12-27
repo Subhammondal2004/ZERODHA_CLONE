@@ -22,8 +22,15 @@ const LoginModal = ({ closeModal }) => {
           setPassword("");
           toast.success(res.data.message);
           closeModal();
-          window.location.href =
-            "https://zerodha-clone-dashboard-igw6.onrender.com";
+          // Redirect to dashboard and pass token via URL hash so dashboard origin can store it
+          if (token) {
+            window.location.href = `https://zerodha-clone-dashboard-igw6.onrender.com/#token=${encodeURIComponent(
+              token
+            )}`;
+          } else {
+            window.location.href =
+              "https://zerodha-clone-dashboard-igw6.onrender.com";
+          }
         }
       })
       .catch((error) => {
