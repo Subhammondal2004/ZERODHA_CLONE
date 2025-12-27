@@ -44,6 +44,8 @@ const Holdings = () => {
 
           {holdings.map((stock, index) => {
             const profitClass = stock.isProfit ? "profit" : "loss";
+            const sym = stock.isProfit ? "+" : "-";
+            const netCharge = stock.netCharge === undefined ? ((stock.curPrice - stock.avg * stock.qty)/stock.curPrice * 100).toFixed(2) : stock.netCharge;
 
             return (
               <tr key={index}>
@@ -53,8 +55,8 @@ const Holdings = () => {
                 <td>{stock.price.toFixed(2)}</td>
                 <td>{stock.curPrice.toFixed(2)}</td>
                 <td className={profitClass}>{(stock.curPrice - stock.avg * stock.qty).toFixed(2)}</td>
-                <td className={profitClass}>{stock.netCharge}</td>
-                <td className={profitClass}>{stock.dayCharge}</td>
+                <td className={profitClass}>{sym}{netCharge}%</td>
+                <td className={profitClass} style={{fontSize:"15px"}}>{stock.dayCharge}</td>
               </tr>
             );
           })}

@@ -89,12 +89,12 @@ const WatchListItem = ({ stock }) => {
           <span className="price">{stock.price}</span>
         </div>
       </div>
-      {showWatchList && <WatchListActions uid={stock.name} />}
+      {showWatchList && <WatchListActions avg={stock.price} />}
     </li>
   );
 };
 
-const WatchListActions = ({ uid }) => {
+const WatchListActions = ({ avg }) => {
   // const generalContext = useContext(GeneralContext);
 
   // const handleBuyClick = () => {
@@ -123,7 +123,7 @@ const WatchListActions = ({ uid }) => {
           <bottom className="sell">Sell</bottom>
         </Tooltip>
         {modaltype && (
-          <BuySellModal type={modaltype} onClose={() => setModalType(null)} />
+          <BuySellModal type={modaltype} avg={avg} onClose={() => setModalType(null)} />
         )}
         <Tooltip
           title="Analytics (A)"

@@ -35,20 +35,20 @@ const Funds = () => {
           <div className="table">
             <div className="data m-5">
               <p>Available margin</p>
-              <p>{fund.availableBal}</p>
+              <p>{(fund.availableBal).toFixed(2)}</p>
             </div>
             <div className="data m-5">
               <p>Used margin</p>
-              <p>{fund.usedMargin}</p>
+              <p>{(fund.usedMargin).toFixed(2)}</p>
             </div>
             <div className="data">
               <p>Available cash</p>
-              <p className="imp">{fund.availableBal}</p>
+              <p className="imp">{(fund.availableBal).toFixed(2)}</p>
             </div>
             <hr />
             <div className="data">
               <p>Opening Balance</p>
-              <p>{fund.openingBal}</p>
+              <p>{(fund.openingBal).toFixed(2)}</p>
             </div>
             <div className="data">
               <p>Payin</p>

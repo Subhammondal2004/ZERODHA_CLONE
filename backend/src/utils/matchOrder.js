@@ -1,11 +1,9 @@
+import { Order } from "../models/orders-model.js";
+import { Trade } from "../models/trade-model.js";
+import { Holding } from "../models/holdings-model.js";
+import { Fund } from "../models/funds-model.js";
 
-import { Order } from "../models/Order.model.js";
-import { Trade } from "../models/Trade.model.js";
-import {Holding } from "../models/Holding.model.js";
-import { Fund } from "../models/Fund.model.js";
-
-
-export const matchOrders = async () => {
+const matchOrders = async () => {
   const buyOrders = await Order.find({
     orderType: "BUY",
     status: "OPEN",
@@ -50,7 +48,7 @@ export const matchOrders = async () => {
       await buy.save();
       await sell.save();
 
-      await updateHolding(buy.userId, tradedQty, tradePrice);
+      await updateHolding(buy.avg, buy.name, tradedQty, tradePrice);
 
       await settleFunds(buy.userId, tradedQty * tradePrice);
 
@@ -59,24 +57,16 @@ export const matchOrders = async () => {
   }
 };
 
-
-const updateHolding = async (userId,qty, price) => {
-  const holding = await Holding.findOne({ userId});
-
-  if (!holding) {
-    holding = await Holding.create({
-      userId,
-      qty,
-      price,
-    });
-  } else {
-    const totalCost = holding.avg * holding.qty + price * qty;
-    holding.qty += qty;
-    holding.avg = totalCost / holding.qty;
-    await holding.save();
-  }
+const updateHolding = async (avg, name, qty, price) => {
+  const holdings = await Holding.create({
+    name,
+    qty,
+    avg,
+    price,
+    curPrice: price * qty,
+    isProfit: price * qty - avg * qty >= 0.0
+  });
 };
-
 
 const settleFunds = async (userId, amount) => {
   const fund = await Fund.findOne({ userId });
@@ -84,3 +74,7 @@ const settleFunds = async (userId, amount) => {
   await fund.save();
 };
 
+
+export {
+  matchOrders
+}

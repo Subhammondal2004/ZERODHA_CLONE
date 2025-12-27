@@ -1,11 +1,10 @@
 import "./FundModal.css";
 import react, { useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { handleAxiosError } from "../handleAxiosError";
 import { useNavigate } from "react-router-dom";
 
-export default function BuySellModal({ type, onClose }) {
+export default function BuySellModal({ avg, type, onClose }) {
   const [price, setPrice] = useState(0.0);
   const [qty, setQty] = useState(0);
   const [name, setName] = useState("");
@@ -20,6 +19,7 @@ export default function BuySellModal({ type, onClose }) {
         {
           name,
           price,
+          avg,
           qty,
           orderType: type,
         },

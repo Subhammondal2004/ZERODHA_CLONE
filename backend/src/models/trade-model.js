@@ -6,7 +6,7 @@ const TradeSchema = new Schema({
         ref: "Order"
     },
     userId :{
-        typr: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "User"
     },
     qty:{

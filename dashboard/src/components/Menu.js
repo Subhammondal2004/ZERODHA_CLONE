@@ -112,7 +112,7 @@ const Menu = ({ user }) => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <button className="avatar" style={{fontSize:"25px"}} onClick={handleLogout}>
+          <button className="avatar" style={{fontSize:"25px", cursor:"pointer"}} onClick={handleLogout}>
             {ava}
           </button>
           <p className="username">{user.name}</p>

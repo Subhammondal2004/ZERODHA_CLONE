@@ -3,8 +3,7 @@ import mongoose, {Schema} from "mongoose";
 const OrderSchema = new Schema({
     userId:{
         type: Schema.Types.ObjectId,
-        ref:"user",
-        required: true
+        ref: "User"
     },
     name:{
         type:String,
@@ -13,6 +12,9 @@ const OrderSchema = new Schema({
     qty:{
         type:Number,
         default:0
+    },
+    avg:{
+        type:Number
     },
     price:{
         type:Number,

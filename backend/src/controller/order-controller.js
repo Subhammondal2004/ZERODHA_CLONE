@@ -3,11 +3,12 @@ import ApiError from "../utils/apiError.js";
 import ApiResponse from "../utils/apiResponse.js";
 import { Order } from "../models/orders-model.js";
 import { Fund } from "../models/funds-model.js";
+import { matchOrders } from "../utils/matchOrder.js";
 
 const createOrder = asyncHandler( async (req, res)=>{
-    const { name, price, qty, orderType } = req.body;
+    const { name, avg, price, qty, orderType } = req.body;
 
-    if([name, price, qty, orderType].some((field) => field === "")){
+    if([name, avg, price, qty, orderType].some((field) => field === "")){
         throw new ApiError(400, "All fields are required!");
     }
 
@@ -31,9 +32,12 @@ const createOrder = asyncHandler( async (req, res)=>{
         userId: req.user._id,
         name,
         price,
+        avg,
         qty,
         orderType
     })
+
+    matchOrders();
 
     return res
     .status(201)
@@ -78,7 +82,10 @@ const cancelOrder = asyncHandler(async(req, res)=>{
 })
 
 const getOrders = asyncHandler(async(req, res)=>{
-    const orders = await Order.find({ userId: req.user._id });
+    const orders = await Order.find({ 
+        userId: req.user._id,
+        status: { $ne: "COMPLETE" }
+     });
 
     return res
     .status(200)
