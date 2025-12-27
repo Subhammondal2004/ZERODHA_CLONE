@@ -22,17 +22,17 @@ const Summary = ({user}) => {
 
         <div className="data">
           <div className="first">
-            <h3 style={{color:"green"}}><CurrencyRupeeIcon />{fund.availableBal}</h3>
+            <h3 style={{color:"green"}}><CurrencyRupeeIcon />{(fund.availableBal).toFixed(2)}</h3>
             <p>Margin available</p>
           </div>
           <hr />
 
           <div className="second">
             <p>
-              Margins used <span><CurrencyRupeeIcon fontSize="12px"/>{fund.usedMargin}</span>{" "}
+              Margins used <span><CurrencyRupeeIcon fontSize="12px"/>{(fund.usedMargin).toFixed(2)}</span>{" "}
             </p>
             <p>
-              Opening balance <span><CurrencyRupeeIcon fontSize="12px"/>{fund.openingBal}</span>{" "}
+              Opening balance <span><CurrencyRupeeIcon fontSize="12px"/>{(fund.openingBal).toFixed(2)}</span>{" "}
             </p>
           </div>
         </div>

@@ -44,7 +44,7 @@ const Holdings = () => {
 
           {holdings.map((stock, index) => {
             const profitClass = stock.isProfit ? "profit" : "loss";
-            const sym = stock.isProfit ? "+" : "-";
+            const sym = stock.isProfit ? "+" : " ";
             const netCharge = stock.netCharge === undefined ? ((stock.curPrice - stock.avg * stock.qty)/stock.curPrice * 100).toFixed(2) : stock.netCharge;
 
             return (

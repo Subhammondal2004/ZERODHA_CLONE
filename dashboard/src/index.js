@@ -1,21 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import "./index.css";
 import Home from "./components/Home";
 import { attachToken, setToken } from "./auth";
 import { ToastContainer } from "react-toastify";
 import { FundsProvider } from "./components/FundContext";
 
-// If token is present in URL hash (redirect from frontend), store it for this origin
-const hash = window.location.hash || "";
-if (hash.startsWith("#token=")) {
-  const token = decodeURIComponent(hash.replace("#token=", ""));
-  if (token) {
-    setToken(token);
-    // remove token from URL without reloading
-    window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
-  }
+// If token is present in URL query (redirect from frontend), store it for this origin
+const params = new URLSearchParams(window.location.search || "");
+const tokenFromQuery = params.get("token");
+if (tokenFromQuery) {
+  setToken(tokenFromQuery);
+  // remove token from URL without reloading
+  params.delete("token");
+  const newSearch = params.toString();
+  const newUrl =
+    window.location.pathname +
+    (newSearch ? `?${newSearch}` : "") +
+    window.location.hash;
+  window.history.replaceState(null, document.title, newUrl);
 }
 
 attachToken();
@@ -24,7 +28,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <FundsProvider>
-      <BrowserRouter>
+      <Router>
         <Routes>
           <Route path="/*" element={<Home />} />
         </Routes>
@@ -35,7 +39,7 @@ root.render(
           draggable
           theme="colored"
         />
-      </BrowserRouter>
+      </Router>
     </FundsProvider>
   </React.StrictMode>
 );
