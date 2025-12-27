@@ -7,11 +7,12 @@ import { attachToken } from "./auth";
 import { ToastContainer } from "react-toastify";
 import { FundsProvider } from "./components/FundContext";
 
+attachToken();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <FundsProvider>
-      {attachToken()}
       <BrowserRouter>
         <Routes>
           <Route path="/*" element={<Home />} />

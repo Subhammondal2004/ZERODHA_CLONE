@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { attachToken } from "../auth";
 
 import Dashboard from "./Dashboard";
 import TopBar from "./TopBar";
@@ -10,6 +11,8 @@ const Home = () => {
   const URL = process.env.REACT_APP_SERVER_URL;
 
   useEffect(() => {
+    attachToken();
+    console.log("Auth header:", axios.defaults.headers?.common?.Authorization);
     axios
       .get(`${URL}/users/loggedinuser`)
       .then((res) => {
@@ -17,7 +20,8 @@ const Home = () => {
         setLoading(false);
       })
       .catch(() => {
-        window.location.href = "http://localhost:3000";
+        window.location.href =
+          "https://zerodha-clone-frontend-xre8.onrender.com";
       });
   }, []);
   if (loading) {

@@ -28,7 +28,7 @@ const Menu = ({ user }) => {
           setUserLogout(null);
           clearToken();
           toast.success(res.data.message);
-          window.location.href = "http://localhost:3000";
+          window.location.href = "https://zerodha-clone-frontend-xre8.onrender.com";
         }
       })
       .catch((err) => handleAxiosError(err));
