@@ -5,8 +5,8 @@ const app = express();
 
 const OPTIONS={
     origin: [
-        "http://localhost:3000",
-        "http://localhost:3001"
+        "https://zerodha-clone-frontend-xre8.onrender.com",
+        "https://zerodha-clone-dashboard-igw6.onrender.com"
     ],
     credentials: true
 }

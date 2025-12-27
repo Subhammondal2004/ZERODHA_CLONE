@@ -24,6 +24,7 @@ const LoginModal = ({ closeModal }) => {
       )
       .then((res) => {
         if (res.data.success) {
+          console.log(res.data)
           setEmail("");
           setPassword("");
           toast.success(res.data.message);
