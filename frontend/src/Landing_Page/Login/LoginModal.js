@@ -27,7 +27,7 @@ const LoginModal = ({ closeModal }) => {
           setEmail("");
           setPassword("");
           toast.success(res.data.message);
-          window.location.href = "https://zerodha-clone-dashboard-av6a.onrender.com";
+          window.location.href = "https://zerodha-clone-dashboard-igw6.onrender.com";
         }
       })
       .catch((error) => handleAxiosError(error));
