@@ -11,9 +11,7 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get(`${URL}/users/loggedinuser`, {
-        withCredentials: true,
-      })
+      .get(`${URL}/users/loggedinuser`)
       .then((res) => {
         setUser(res.data.data.user);
         setLoading(false);

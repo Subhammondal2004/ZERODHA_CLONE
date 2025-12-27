@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { handleAxiosError } from "../handleAxiosError";
+import { clearToken } from "../auth";
 
 const Menu = ({ user }) => {
-  const ava = (user.name).charAt(0);
+  const ava = user.name.charAt(0);
   const [selMenu, setSelMenu] = useState(0);
   const [isprofileDropdown, setIsprofileDropdown] = useState(false);
   const [userLogout, setUserLogout] = useState(null);
@@ -21,12 +22,11 @@ const Menu = ({ user }) => {
 
   const handleLogout = () => {
     axios
-      .get(`${URL}/users/logout`, {
-        withCredentials: true,
-      })
+      .get(`${URL}/users/logout`, {})
       .then((res) => {
         if (res.data.success) {
           setUserLogout(null);
+          clearToken();
           toast.success(res.data.message);
           window.location.href = "http://localhost:3000";
         }
@@ -112,7 +112,11 @@ const Menu = ({ user }) => {
         </ul>
         <hr />
         <div className="profile" onClick={handleProfileClick}>
-          <button className="avatar" style={{fontSize:"25px", cursor:"pointer"}} onClick={handleLogout}>
+          <button
+            className="avatar"
+            style={{ fontSize: "25px", cursor: "pointer" }}
+            onClick={handleLogout}
+          >
             {ava}
           </button>
           <p className="username">{user.name}</p>

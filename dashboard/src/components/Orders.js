@@ -1,24 +1,20 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const URL = process.env.REACT_APP_SERVER_URL;
   useEffect(() => {
-    axios.get(`${URL}/orders/`,{
-      withCredentials: true
-    }).then((res) => {
+    axios.get(`${URL}/orders/`).then((res) => {
       setOrders(res.data.data);
     });
   }, [orders]);
 
-  const handleCancel = (id) =>{
-    axios.delete(`${URL}/orders/cancel/${id}`,{
-      withCredentials: true
-    }).then((res)=>{
+  const handleCancel = (id) => {
+    axios.delete(`${URL}/orders/cancel/${id}`).then((res) => {
       console.log(res.data);
-    })
-  }
+    });
+  };
   return (
     <>
       <h3 className="title">Orders ({orders.length})</h3>
@@ -41,7 +37,14 @@ const Orders = () => {
                 <td>{order.price}</td>
                 <td>{order.orderType}</td>
                 <td>{order.status}</td>
-                <td><button className="btn btn-danger" onClick={()=> handleCancel(order._id)}>cancel</button></td>
+                <td>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleCancel(order._id)}
+                  >
+                    cancel
+                  </button>
+                </td>
               </tr>
             );
           })}

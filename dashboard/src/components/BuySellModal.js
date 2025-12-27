@@ -14,21 +14,17 @@ export default function BuySellModal({ avg, type, onClose }) {
 
   const handleBuySell = (type) => {
     axios
-      .post(
-        `${URL}/orders/create`,
-        {
-          name,
-          price,
-          avg,
-          qty,
-          orderType: type,
-        },
-        { withCredentials: true }
-      )
+      .post(`${URL}/orders/create`, {
+        name,
+        price,
+        avg,
+        qty,
+        orderType: type,
+      })
       .then((res) => {
         setBuySell(res.data.data);
         onClose();
-        navigate("/orders")
+        navigate("/orders");
       })
       .catch((error) => {
         handleAxiosError(error);

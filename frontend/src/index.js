@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { attachToken } from "./auth";
 
 import Homepage from "./Landing_Page/Home/HomePage";
 import Signup from "./Landing_Page/Signup/Signup";
@@ -15,6 +16,7 @@ import Navbar from "./Landing_Page/Navbar";
 import Footer from "./Landing_Page/Footer";
 import NotFound from "./Landing_Page/NotFound";
 
+attachToken();
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>

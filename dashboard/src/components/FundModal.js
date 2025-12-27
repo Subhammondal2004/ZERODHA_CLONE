@@ -9,10 +9,10 @@ export default function FundModal({ type, onClose }) {
   const [addfund, setAddFund] = useState(null);
   const [withdrawfund, setWithdrawFund] = useState(null);
   const URL = process.env.REACT_APP_SERVER_URL;
-  
+
   const handleAddFunds = () => {
     axios
-      .post(`${URL}/funds/add`, { amount: amount }, { withCredentials: true })
+      .post(`${URL}/funds/add`, { amount: amount })
       .then((res) => {
         toast.success(res.data.message);
         setAddFund(res.data.data);
@@ -25,11 +25,7 @@ export default function FundModal({ type, onClose }) {
 
   const handleWithdrawFunds = () => {
     axios
-      .post(
-        `${URL}/funds/withdraw`,
-        { amount: amount },
-        { withCredentials: true }
-      )
+      .post(`${URL}/funds/withdraw`, { amount: amount })
       .then((res) => {
         toast.success(res.data.message);
         setWithdrawFund(res.data.data);
@@ -40,7 +36,6 @@ export default function FundModal({ type, onClose }) {
       });
   };
 
-  
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-box" onClick={(e) => e.stopPropagation()}>

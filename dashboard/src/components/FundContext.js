@@ -10,7 +10,7 @@ export const FundsProvider = ({ children }) => {
 
   const fetchFunds = async () => {
     axios
-      .get(`${URL}/funds/`, { withCredentials: true })
+      .get(`${URL}/funds/`)
       .then((res) => {
         setFund(res.data.data);
       })
@@ -24,7 +24,7 @@ export const FundsProvider = ({ children }) => {
 
   useEffect(() => {
     fetchFunds();
-  },[fund]);
+  }, [fund]);
 
   return (
     <FundsContext.Provider value={{ fund, fetchFunds, loading }}>

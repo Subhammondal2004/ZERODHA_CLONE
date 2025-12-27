@@ -3,6 +3,7 @@ import "./LoginModal.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { handleAxiosError } from "../../handleAxiosError";
+import { setToken } from "../../auth";
 
 const LoginModal = ({ closeModal }) => {
   const [email, setEmail] = useState("");
@@ -12,27 +13,22 @@ const LoginModal = ({ closeModal }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(
-        `${URL}/users/login`,
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+      .post(`${URL}/users/login`, { email, password })
       .then((res) => {
         if (res.data.success) {
-          console.log(res.data)
+          const token = res.data?.data?.token;
+          if (token) setToken(token);
           setEmail("");
           setPassword("");
           toast.success(res.data.message);
-          window.location.href = "https://zerodha-clone-dashboard-igw6.onrender.com";
+          closeModal();
+          window.location.href =
+            "https://zerodha-clone-dashboard-igw6.onrender.com";
         }
       })
-      .catch((error) => handleAxiosError(error));
-    closeModal();
+      .catch((error) => {
+        handleAxiosError(error);
+      });
   };
 
   return (
