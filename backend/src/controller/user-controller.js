@@ -39,7 +39,7 @@ const signup = asyncHandler(async (req, res) => {
     userId: signupUser._id,
     availableBal: 0,
     usedMargin: 0,
-    openingBal: 0
+    openingBal: 0,
   });
 
   return res
@@ -74,7 +74,6 @@ const login = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .cookie("token", token, options)
     .json(
       new ApiResponse(
         200,
@@ -107,16 +106,10 @@ const logout = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, [], "User logged Out successfully!!"));
 });
 
-const loggedInUser = asyncHandler(async(req, res)=>{
+const loggedInUser = asyncHandler(async (req, res) => {
   return res
     .status(200)
-    .json(
-      new ApiResponse(
-        200,
-        { user:req.user },
-        "Logged In user fetched!!"
-      )
-    )
-})
+    .json(new ApiResponse(200, { user: req.user }, "Logged In user fetched!!"));
+});
 
 export { signup, login, logout, loggedInUser };

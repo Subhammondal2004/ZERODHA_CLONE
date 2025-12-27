@@ -3,17 +3,19 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
 
-const OPTIONS={
-    origin: [
-        "https://zerodha-clone-frontend-xre8.onrender.com",
-        "https://zerodha-clone-dashboard-igw6.onrender.com"
-    ],
-    credentials: true
-}
+const OPTIONS = {
+  origin: [
+    "https://zerodha-clone-frontend-xre8.onrender.com",
+    "https://zerodha-clone-dashboard-igw6.onrender.com",
+  ],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  exposedHeaders: ["Authorization"],
+};
 
 app.use(cors(OPTIONS));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
